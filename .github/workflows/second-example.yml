@@ -3,17 +3,32 @@ name: My Second workflow
 on: push
 
 jobs:
-  ascii_job:
+  build_job1:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
+      - name: Install cowsay
+        run: sudo apt-get install -y cowsay
 
-      - name: List Repo Files
-        run: ls -ltra
+      - name: Execute cowsay
+        run: cowsay -f dragon "Run for cover!" >> dragon.txt
 
-      - name: Executing Shell Script
-        run: |
-         chmod +x ascii-script.sh
-         ./ascii-script.sh
-          
+      - name: Sleep for 15 seconds
+        run: sleep 15
+
+  test_job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sleep for 10 seconds
+        run: sleep 10
+      
+      - name: Test file exists
+        run: grep -i "dragon" dragon.txt
+
+  deploy_job3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read file
+        run: cat dragon.txt
+
+      - name: Deploy step
+        run: echo "Deploying application..."
