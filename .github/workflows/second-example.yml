@@ -1,0 +1,17 @@
+name: My Second workflow
+
+on: push
+
+jobs:
+  ascii_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: List Repo Files
+        run: ls -ltra
+
+      - name: Executing Shell Script
+        run: ./ascii_job.sh
+          
